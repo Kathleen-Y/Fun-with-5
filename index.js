@@ -1,21 +1,15 @@
 $(document).ready(function() {
-  
-    // test flag
     const test = false;
-  
-    // get times from moment
     const now = moment().format('ddd MMMM Do');
-  
-    // commented out for test in non-standard hours
+
     let nowHour24 = moment().format('H');
     let nowHour12 = moment().format('h');
-  
-    // set times for tesitng after hours
+ 
     if (test) {
       nowHour24 = 13;
       nowHour12 = 1;
     }
-  
+
     let $dateHeading = $('#currentDay');
     $dateHeading.text(now);
      
@@ -23,31 +17,25 @@ $(document).ready(function() {
   
     if (test) { console.log(storedPlans); }
   
-    // If plans were retrieved from localStorage, update the plan array to it
     if (storedPlans !== null) {
       planTextArr = storedPlans;
     } else {
 
-      planTextArr = new Array(9);
+      planTextArr = new Array(8);
       planTextArr[3] = "lunch";
     }
   
     if (test) { console.log("full array of plned text",planTextArr); }
-  
-    // set variable referencing planner element
+
     let $plannerDiv = $('#plannerContainer');
-    // clear existing elements
     $plannerDiv.empty();
   
     if (test) { console.log("current time",nowHour12); }
   
-  
-    // build calendar by row for fix set of hours
-    for (let hour = 9; hour <= 17; hour++) {
-      // index for array use offset from hour
-      let index = hour - 9;
+
+    for (let hour = 8; hour <= 17; hour++) {
+      let index = hour - 8;
       
-      // build row components
       let $rowDiv = $('<div>');
       $rowDiv.addClass('row');
       $rowDiv.addClass('plannerRow');
@@ -94,12 +82,12 @@ $(document).ready(function() {
       $dailyPlanSpn.val( planTextArr[index] );
       
       // create col to control width
-      let $col9IptDiv = $('<div>');
-      $col9IptDiv.addClass('col-md-9');
+      let $col8IptDiv = $('<div>');
+      $col8IptDiv.addClass('col-md-8');
   
       // add col width and row component to row
-      $rowDiv.append($col9IptDiv);
-      $col9IptDiv.append($dailyPlanSpn);
+      $rowDiv.append($col8IptDiv);
+      $col8IptDiv.append($dailyPlanSpn);
       // STOP building Time box portion of row
   
       // START building save portion of row
