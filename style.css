@@ -1,0 +1,87 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+input {
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #000000;
+  padding: 10px;
+}
+
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+  color: black;
+  border-radius: 0;
+  border-bottom: 10px solid black;
+}
+
+.col-md-1, .col-md-2, .col-md-9 {
+  padding: 0;
+}
+
+#plannerContainer {
+  background-color: transparent;
+  margin-top: 20px;
+  margin-bottom: 80px;
+  padding: 40px;
+} 
+
+.plannerRow {
+  height: 50px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 1em;
+  line-height: 1.5;
+  border-radius: 15px;
+}
+
+.timeBox {
+  background-color: whitesmoke;  
+  color: teal;
+  height:100%;
+  width: 100%;
+  text-align: center;
+  border-radius: 15px;
+  display: inline-block;
+  font-size: 16pt;
+}
+
+.dailyPlan {
+  color: whitesmoke;  
+  font-size: 16pt;
+  height:100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+
+.saveIcon {
+  background-color: teal;
+  color: whitesmoke;
+  border-radius: 0px 9px 9px 0px;
+  font-size: 1.5em;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    /* removes paddding on either side */
+    padding-left: 0;
+    padding-right: 0;
+    align-content: center;
+  }
+  .plannerRow {
+    height: 100%;
+    border-radius: 10;
+    margin: 15px;
+  }
+
+}
+
+
