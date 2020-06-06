@@ -1,87 +1,75 @@
 body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1;
+ color: blue;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+ text-align: center;   
 }
 
-input {
-  background: transparent;
-  border: none;
-  resize: none;
-  color: #000000;
-  padding: 10px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, minmax(100px, auto));
+    grid-gap: 10px;
 }
 
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
-  color: black;
-  border-radius: 0;
-  border-bottom: 10px solid black;
+.header {
+    grid-column: 1 / 7;
+    background-color: black;
+    padding-top: 25px;
+    color: white;
+    }
+
+.main {
+    grid-column: 2 / 7;
+   background-color: ivory;
 }
 
-.col-md-1, .col-md-2, .col-md-9 {
-  padding: 0;
+#UVIindex {
+    color: white;
+    background-color: red;
 }
 
-#plannerContainer {
-  background-color: transparent;
-  margin-top: 20px;
-  margin-bottom: 80px;
-  padding: 40px;
-} 
-
-.plannerRow {
-  height: 50px;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  font-size: 1em;
-  line-height: 1.5;
-  border-radius: 15px;
+.sidebar {
+    grid-row: 2 / 4;
+    height: 450px;
+    background-color: ivory;
 }
 
-.timeBox {
-  background-color: whitesmoke;  
-  color: teal;
-  height:100%;
-  width: 100%;
-  text-align: center;
-  border-radius: 15px;
-  display: inline-block;
-  font-size: 16pt;
+.card-1 {
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: blue;
+    color: gray;
+    text-align: left;
 }
 
-.dailyPlan {
-  color: whitesmoke;  
-  font-size: 16pt;
-  height:100%;
-  width: 100%;
-  white-space: pre-wrap;
+.card-2 {
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: blue;
+    color: gray;
+    text-align: left;
 }
 
-.saveIcon {
-  background-color: teal;
-  color: whitesmoke;
-  border-radius: 0px 9px 9px 0px;
-  font-size: 1.5em;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+.card-3 {
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: blue;
+    color: gray;
+    text-align: left;
 }
 
-@media (max-width: 768px) {
-  .container-fluid {
-    /* removes paddding on either side */
-    padding-left: 0;
-    padding-right: 0;
-    align-content: center;
-  }
-  .plannerRow {
-    height: 100%;
-    border-radius: 10;
-    margin: 15px;
-  }
-
+.card-4 {
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: blue;
+    color: gray;
+    text-align: left;
 }
 
-
+.card-5 {
+    border: black solid 1px;
+    border-radius: 15px;
+    background-color: blue;
+    color: gray;
+    text-align: left;
+}
