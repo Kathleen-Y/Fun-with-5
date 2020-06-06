@@ -2,29 +2,71 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Work Day Schedule</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
 </head>
 
 <body>
-  <header class="jumbotron">
-    <h1 class="display-2">Work Day Scheduler</h1>
-    <h2 class="lead">A simple calendar app for scheduling your 8 to 5 work day</h2>
-    <h2 id="currentDay" class="lead"></h2>
-  </header>
-  <div class="container" id="plannerContainer"> </div>
+    <!-- Header top of the page -->
+    <div class="grid">
+        <div class="header">
+            <h1>Weather Dashboard</h1>
+        </div>
+        <div class="sidebar">
+            <form class="example" action="">
+                <input type="text" placeholder="Search..." name="search">
+                <button type="submit" style="background-color: green;"><i class="fa fa-search"></i></button>
+            </form>
+            <br>
+        </div>
+        <div class="main">
+            <h3 id="city"></h3>
+            <div id="temp"></div>
+            <div id="humidity"></div>
+            <div id="wind"></div>
+            <div id="UVIindex"></div>
+        </div>
+        <div class="card-1">
+            <p id="day-1"></p>
+            <p id="icon-1"></p>
+            <p id="temp-1"></p>
+            <p id="humidity-1"></p>
+        </div>
+        <div class="card-2">
+            <p id="day-2"></p>
+            <p id="icon-2"></p>
+            <p id="temp-2"></p>
+            <p id="humidity-2"></p>
+        </div>
+        <div class="card-3">
+            <p id="day-3"></p>
+            <p id="icon-3"></p>
+            <p id="temp-3"></p>
+            <p id="humidity-3"></p>
+        </div>
+        <div class="card-4">
+            <p id="day-4"></p>
+            <p id="icon-4"></p>
+            <p id="temp-4"></p>
+            <p id="humidity-4"></p>
+        </div>
+        <div class="card-5">
+            <p id="day-5"></p>
+            <p id="icon-5"></p>
+            <p id="temp-5"></p>
+            <p id="humidity-5"></p>
+        </div>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"
-    integrity="sha256-H9jAz//QLkDOy/nzE9G4aYijQtkLt9FvGmdUTwBk6gs=" crossorigin="anonymous"></script>
-  <script src="Script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="./assets/javascript/main.js"></script>
 </body>
 
 </html>
