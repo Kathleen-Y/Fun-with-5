@@ -1,162 +1,130 @@
-$(document).ready(function() {
-    const test = false;
-    const now = moment().format('ddd MMMM Do');
+$(document).ready(function () {
 
-    let nowHour24 = moment().format('H');
-    let nowHour12 = moment().format('h');
- 
-    if (test) {
-      nowHour24 = 13;
-      nowHour12 = 1;
+    var cities = [];
+    var userCitySearch;
+
+    function userCitiesInput(event) {
+        event.preventDefault();
+        userCitySearch = $("input").val();
+        cities.push(userCitySearch);
+
+        // sets cities searched into local storage
+        localStorage.setItem("cityName", JSON.stringify(cities));
+
+        //variable
+        var citySearch = $("<div>").text(userCitySearch).addClass("clickable");
+        $("form").append(citySearch);
+        weatherApi(userCitySearch);
+    };
+
+    function cityList() {
+        cities = JSON.parse(localStorage.getItem("cityName"));
+        if (cities == null) {
+            cities = [];
+        }
+        for (var i = 0; i < cities.length; i++) {
+            var userCityLoop = cities[i];
+            var pEl = $("<p>").text(userCityLoop);
+            pEl.addClass("clickable");
+            $("form").append(pEl);
+        }
+    };
+
+    function weatherApi(userCitySearch) {
+        //variable holds api url to retrieve information
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userCitySearch + "&appid=3d9efbfbf46372a4ff1a6d074b5ed18c";
+
+        //ajax call and GET method to retrieve data
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            // variables holding icon data
+            var current = "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png";
+            var firstDay = "http://openweathermap.org/img/wn/" + response.list[5].weather[0].icon + "@2x.png";
+            var secondDay = "http://openweathermap.org/img/wn/" + response.list[13].weather[0].icon + "@2x.png";
+            var thirdDay = "http://openweathermap.org/img/wn/" + response.list[21].weather[0].icon + "@2x.png";
+            var fourthDay = "http://openweathermap.org/img/wn/" + response.list[29].weather[0].icon + "@2x.png";
+            var fifthDay = "http://openweathermap.org/img/wn/" + response.list[37].weather[0].icon + "@2x.png";
+
+            // variables to store icons for easier access
+            var mainIcon = $('<img src=" '+ current +' "/>');
+            var firstIcon = $('<img src=" '+ firstDay +' "/>');
+            var secondIcon = $('<img src=" '+ secondDay +' "/>');
+            var thirdIcon = $('<img src=" '+ thirdDay +' "/>');
+            var fourthIcon = $('<img src=" '+ fourthDay +' "/>');
+            var fifthIcon = $('<img src=" '+ fifthDay +' "/>');
+
+            // variables needed to hold data for long and lat for uvi Index 
+            var latCoordinate = response.city.coord.lat;
+            var longCoordinate = response.city.coord.lon;
+
+            //Assign current weather to main div in DOM
+            $("#city").text(response.city.name + "(" + response.list[0].dt_txt.substr(0, 10) + ")").append(mainIcon);
+            $("#temp").text("Temperature:" + ((response.list[5].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
+            $("#humidity").text("Humidity: " + response.list[5].main.humidity + " %");
+            $("#wind").text("Wind Speed" + response.list[5].wind.speed + " mph");
+
+            // Data for current day information to be displayed to DOM
+            $("#day-1").text(response.list[5].dt_txt.substr(0, 10));
+            $("#icon-1").empty().append(firstIcon);
+            $("#temp-1").text("Temp:" + ((response.list[5].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
+            $("#humidity-1").text("Humidity:" + response.list[5].main.humidity + " %");
+
+            //Data for day after current day to be displayed on card-2 in DOM
+            $("#day-2").text(response.list[13].dt_txt.substr(0, 10));
+            $("#icon-2").empty().append(secondIcon);
+            $("#temp-2").text("Temp:" + ((response.list[13].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
+            $("#humidity-2").text("Humidity:" + response.list[13].main.humidity + " %");
+
+            //Data for two days after current day to be displayed in card 3 in DOM
+            $("#day-3").text(response.list[21].dt_txt.substr(0, 10));
+            $("#icon-3").empty().append(thirdIcon);
+            $("#temp-3").text("Temp:" + ((response.list[21].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
+            $("#humidity-3").text("Humidity:" + response.list[21].main.humidity + " %");
+
+            //Data for three days after current day to be displayed in card 4 in DOM
+            $("#day-4").text(response.list[29].dt_txt.substr(0, 10));
+            $("#icon-4").empty().append(fourthIcon);
+            $("#temp-4").text("Temp:" + ((response.list[29].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
+            $("#humidity-4").text("Humidity:" + response.list[29].main.humidity + " %");
+
+            //Data for four days after current day to be displayed in card 5 in DOM
+            $("#day-5").text(response.list[37].dt_txt.substr(0, 10));
+            $("#icon-5").empty().append(fifthIcon);
+            $("#temp-5").text("Temp:" + ((response.list[37].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
+            $("#humidity-5").text("Humidity:" + response.list[37].main.humidity + " %");
+
+            uviIndex(latCoordinate, longCoordinate)
+        });
+    };
+
+    //Function to retreive UVI index from openweather api 
+    function uviIndex(latCoordinate, longCoordinate) {
+        var indexURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latCoordinate + "&lon=" + longCoordinate + "&exclude=hourly,daily&appid=8d810efcafa44d9cf05372c0c0090226";
+
+        $.ajax({
+            url: indexURL,
+            method: "GET"
+        }).then(function (responsetwo) {
+            console.log(responsetwo);
+
+            //variable to hold uv index data from response 1
+            var UVI = responsetwo.current.uvi;
+
+            //appending uvi to DOM element
+            $("#UVIindex").text("UV Index:" + UVI);
+        });
+    };
+
+    function storedCities() {
+        var userCitySearch = $(this)[0].innerHTML;
+        weatherApi(userCitySearch);
     }
 
-    let $dateHeading = $('#currentDay');
-    $dateHeading.text(now);
-     
-    let storedPlans = JSON.parse(localStorage.getItem("storedPlans"));
-  
-    if (test) { console.log(storedPlans); }
-  
-    if (storedPlans !== null) {
-      planTextArr = storedPlans;
-    } else {
-
-      planTextArr = new Array(8);
-      planTextArr[3] = "lunch";
-    }
-  
-    if (test) { console.log("full array of plned text",planTextArr); }
-
-    let $plannerDiv = $('#plannerContainer');
-    $plannerDiv.empty();
-  
-    if (test) { console.log("current time",nowHour12); }
-  
-
-    for (let hour = 8; hour <= 17; hour++) {
-      let index = hour - 8;
-      
-      let $rowDiv = $('<div>');
-      $rowDiv.addClass('row');
-      $rowDiv.addClass('plannerRow');
-      $rowDiv.attr('hour-index',hour);
-    
-      // Start building Time box portion of row
-      let $col2TimeDiv = $('<div>');
-      $col2TimeDiv.addClass('col-md-2');
-    
-      // create timeBox element (contains time)
-      const $timeBoxSpn = $('<span>');
-      // can use this to get value
-      $timeBoxSpn.attr('class','timeBox');
-      
-      // format hours for display
-      let displayHour = 0;
-      let ampm = "";
-      if (hour > 12) { 
-        displayHour = hour - 12;
-        ampm = "pm";
-      } else {
-        displayHour = hour;
-        ampm = "am";
-      }
-      
-      // populate timeBox with time
-      $timeBoxSpn.text(`${displayHour} ${ampm}`);
-  
-      // insert into col inset into timebox
-      $rowDiv.append($col2TimeDiv);
-      $col2TimeDiv.append($timeBoxSpn);
-      // STOP building Time box portion of row
-  
-      // START building input portion of row
-      // build row components
-      let $dailyPlanSpn = $('<input>');
-  
-      $dailyPlanSpn.attr('id',`input-${index}`);
-      $dailyPlanSpn.attr('hour-index',index);
-      $dailyPlanSpn.attr('type','text');
-      $dailyPlanSpn.attr('class','dailyPlan');
-  
-      // access index from data array for hour 
-      $dailyPlanSpn.val( planTextArr[index] );
-      
-      // create col to control width
-      let $col8IptDiv = $('<div>');
-      $col8IptDiv.addClass('col-md-8');
-  
-      // add col width and row component to row
-      $rowDiv.append($col8IptDiv);
-      $col8IptDiv.append($dailyPlanSpn);
-      // STOP building Time box portion of row
-  
-      // START building save portion of row
-      let $col1SaveDiv = $('<div>');
-      $col1SaveDiv.addClass('col-md-1');
-
-      const saveIcon = "./images/save-regular.svg"; 
-      
-      let $saveBtn = $('<i>');
-      $saveBtn.attr('id',`saveid-${index}`);
-      $saveBtn.attr('save-id',index);
-      $saveBtn.attr('class',"far fa-save saveIcon");
-      
-      // add col width and row component to row
-      $rowDiv.append($col1SaveDiv);
-      $col1SaveDiv.append($saveBtn);
-      // STOP building save portion of row
-  
-      // set row color based on time
-      updateRowColor($rowDiv, hour);
-      
-      // add row to planner container
-      $plannerDiv.append($rowDiv);
-    };
-  
-    // function to update row color
-    function updateRowColor ($hourRow,hour) { 
-  
-      if (test) { console.log("rowColor ",nowHour24, hour); }
-  
-      if ( hour < nowHour24) {
-        if (test) { console.log("lessThan"); }
-        $hourRow.css("background-color","lightgrey")
-      } else if ( hour > nowHour24) {
-        if (test) { console.log("greaterthan"); }
-        $hourRow.css("background-color","lightgreen")
-      } else {
-        if (test) { console.log("eqaul"); }
-        $hourRow.css("background-color","tomato")
-      }
-    };
-  
-    // saves to local storage
-    $(document).on('click','i', function(event) {
-      event.preventDefault();  
-  
-      if (test) { console.log('click pta before '+ planTextArr); }
-  
-      let $index = $(this).attr('save-id');
-  
-      let inputId = '#input-'+$index;
-      let $value = $(inputId).val();
-  
-      planTextArr[$index] = $value;
-  
-  
-      if (test) { console.log('value ', $value); }
-      if (test) { console.log('index ', $index); }
-      if (test) { console.log('click pta after '+ planTextArr); }
-  
-      // remove shawdow pulse class
-      $(`#saveid-${$index}`).removeClass('shadowPulse');
-      localStorage.setItem("storedPlans", JSON.stringify(planTextArr));
-    });  
-    
-    // function to color save button on change of input
-    $(document).on('change','input', function(event) {
-      event.preventDefault();  
-      if (test) { console.log('onChange'); }
-      if (test) { console.log('id', $(this).attr('hour-index')); }
-    });
-  });
+    $("button").on("click", userCitiesInput);
+    $()
+    $(document).on("click", ".clickable", storedCities);
+    cityList();
+});
