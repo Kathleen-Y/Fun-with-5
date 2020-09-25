@@ -40,7 +40,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            // variables holding icon data
+            //  holding icon data
             var current = "http://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png";
             var firstDay = "http://openweathermap.org/img/wn/" + response.list[5].weather[0].icon + "@2x.png";
             var secondDay = "http://openweathermap.org/img/wn/" + response.list[13].weather[0].icon + "@2x.png";
@@ -48,7 +48,7 @@ $(document).ready(function () {
             var fourthDay = "http://openweathermap.org/img/wn/" + response.list[29].weather[0].icon + "@2x.png";
             var fifthDay = "http://openweathermap.org/img/wn/" + response.list[37].weather[0].icon + "@2x.png";
 
-            // variables to store icons for easier access
+            //  to store icons for easier access
             var mainIcon = $('<img src=" '+ current +' "/>');
             var firstIcon = $('<img src=" '+ firstDay +' "/>');
             var secondIcon = $('<img src=" '+ secondDay +' "/>');
@@ -56,11 +56,11 @@ $(document).ready(function () {
             var fourthIcon = $('<img src=" '+ fourthDay +' "/>');
             var fifthIcon = $('<img src=" '+ fifthDay +' "/>');
 
-            // variables needed to hold data for long and lat for uvi Index 
+            //  needed to hold data for long and lat for uvi Index 
             var latCoordinate = response.city.coord.lat;
             var longCoordinate = response.city.coord.lon;
 
-            //Assign current weather to main div in DOM
+            //Assign current weather to main div in DOM, one of the 
             $("#city").text(response.city.name + "(" + response.list[0].dt_txt.substr(0, 10) + ")").append(mainIcon);
             $("#temp").text("Temperature:" + ((response.list[5].main.temp - 273.15) * 1.80 + 32).toFixed(2) + " F");
             $("#humidity").text("Humidity: " + response.list[5].main.humidity + " %");
