@@ -1,4 +1,4 @@
-# Work Day Scheduler
+# Work Day Scheduler  ![GitHub repo size](https://img.shields.io/github/repo-size/Kathleen-Y/Fun-with-5?logo=github)
 Create a simple calendar application that allows the user to save events for each hour of the day. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
 
 
