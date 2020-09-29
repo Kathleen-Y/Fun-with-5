@@ -18,7 +18,7 @@ SO THAT I can manage my time effectively
 * jQuery
 * Moment.js
 
-## Check it out
+## Demo
 * [click here](https://kathleen-y.github.io/Fun-with-5/)
 
 ## Contact
